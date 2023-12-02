@@ -20,7 +20,7 @@ classdef BrainFlowInputParams
     end
     methods
         function obj = BrainFlowInputParams()
-            obj.serial_port = '';
+            obj.serial_port = '/dev/tty.usbmodem11';
             obj.mac_address = '';
             obj.ip_address = '';
             obj.ip_address_aux = '';
@@ -40,5 +40,8 @@ classdef BrainFlowInputParams
         function json_string = to_json(obj)
             json_string = jsonencode(obj);
         end
+        params = BrainFlowInputParams()
+        params.serial_port = "/dev/tty.usbmodem11"
+         board = BoardShim(BoardIds.GANGLION_BOARD, params)
     end
 end
