@@ -20,7 +20,7 @@ classdef BrainFlowInputParams
     end
     methods
         function obj = BrainFlowInputParams()
-            obj.serial_port = '/dev/tty.usbmodem11';
+            obj.serial_port = 'COM3';
             obj.mac_address = '';
             obj.ip_address = '';
             obj.ip_address_aux = '';

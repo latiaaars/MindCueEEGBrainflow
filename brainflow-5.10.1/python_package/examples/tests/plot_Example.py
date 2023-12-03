@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from brainflow.board_shim import BoardShim, BrainFlowInputParams, BoardIds
 import mne
 from mne.channels import read_layout
-def import_to_mne():
+def import_to_mne() :
     BoardShim.enable_dev_board_logger()
     # use synthetic board for demo
     params = BrainFlowInputParams()
@@ -21,6 +21,7 @@ def import_to_mne():
     eeg_channels = BoardShim.get_eeg_channels(BoardIds.SYNTHETIC_BOARD.value)
     eeg_data = data[eeg_channels, :]
     eeg_data = eeg_data / 1000000  # BrainFlow returns uV, convert to V for MNE
+    print(eeg_data)
     # Creating MNE objects from brainflow data arrays
     ch_types = ['eeg'] * len(eeg_channels)
     ch_names = BoardShim.get_eeg_names(BoardIds.SYNTHETIC_BOARD.value)
@@ -32,5 +33,8 @@ def import_to_mne():
     plt.savefig('psd2.png')
 def main():
     import_to_mne()
+    params = BrainFlowInputParams()
+    params.serial_port = "COM3"
+    board = BoardShim(BoardIds.GANGLION_BOARD, params)
 if __name__ == '__main__':
     main()
